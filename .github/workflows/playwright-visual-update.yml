@@ -8,6 +8,9 @@ on:
         required: true
         default: "default"
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   update-visual-snapshots:
     runs-on: ubuntu-latest
@@ -79,5 +82,5 @@ jobs:
         with:
           name: playwright-visual-snapshots-${{ env.PW_SITE }}-${{ github.run_id }}
           path: testing/playwright/sites/${{ env.PW_SITE }}/tests/**/__snapshots__
-          if-no-files-found: warn
+          if-no-files-found: ignore
           retention-days: 14
