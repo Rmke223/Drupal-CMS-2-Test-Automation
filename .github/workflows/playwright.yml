@@ -51,7 +51,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl gnupg2 ca-certificates
           sudo install -m 0755 -d /etc/apt/keyrings
-          curl -fsSL https://pkg.ddev.com/apt/ddev.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ddev.gpg
+          curl -fsSL https://pkg.ddev.com/apt/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/ddev.gpg > /dev/null
+          sudo chmod a+r /etc/apt/keyrings/ddev.gpg
           echo "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *" | sudo tee /etc/apt/sources.list.d/ddev.list
           sudo apt-get update
           sudo apt-get install -y ddev
