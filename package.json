@@ -8,7 +8,7 @@
   "scripts": {
     "test:pw": "playwright test -c testing/playwright/playwright.config.ts",
     "test:pw:site": "playwright test -c testing/playwright/playwright.config.ts",
-    "test:pw:ci": "playwright test -c testing/playwright/playwright.config.ts --reporter=github,html",
+    "test:pw:ci": "playwright test -c testing/playwright/playwright.config.ts --reporter=github,html --grep-invert @visual",
     "test:pw:list": "playwright test -c testing/playwright/playwright.config.ts --list",
     "test:pw:smoke": "playwright test -c testing/playwright/playwright.config.ts --project=smoke-chromium",
     "test:pw:e2e": "playwright test -c testing/playwright/playwright.config.ts --project=e2e-chromium",

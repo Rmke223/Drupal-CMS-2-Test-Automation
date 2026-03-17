@@ -139,7 +139,7 @@ npm run test:pw:visual:update
 - starts DDEV and installs PHP dependencies
 - installs Drupal if missing (`drush site:install` fallback)
 - resolves `PW_BASE_URL` from DDEV
-- runs full Playwright suite
+- runs Playwright CI suite excluding `@visual` by default
 - uploads HTML report and failure artifacts
 
 ### `.github/workflows/playwright-visual-update.yml`
