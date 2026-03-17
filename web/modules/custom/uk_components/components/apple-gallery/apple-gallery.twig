@@ -1,0 +1,32 @@
+{# Apple gallery #}
+{% set gallery_theme = theme|default('dark') %}
+
+<section class="apple-gallery apple-gallery--{{ gallery_theme }}">
+  <div class="apple-gallery__header">
+    <h2 class="apple-gallery__title">{{ title|default('Endless entertainment.') }}</h2>
+  </div>
+  <div class="apple-gallery__track" role="list">
+    {% for item in items|default([]) %}
+      <article class="apple-gallery__item" role="listitem" {% if item.image and item.image.src %}style="background-image:url({{ item.image.src }})"{% endif %}>
+        <div class="apple-gallery__overlay">
+          {% if item.logo_image and item.logo_image.src %}
+            <img class="apple-gallery__logo" src="{{ item.logo_image.src }}" alt="{{ item.logo_image.alt|default('') }}"
+              {% if item.logo_image.width %}width="{{ item.logo_image.width }}"{% endif %}
+              {% if item.logo_image.height %}height="{{ item.logo_image.height }}"{% endif %}
+              loading="lazy" decoding="async" />
+          {% endif %}
+          <h3 class="apple-gallery__item-title">{{ item.title }}</h3>
+          {% if item.genre or item.note %}
+            <p class="apple-gallery__meta">
+              {% if item.genre %}<span class="apple-gallery__genre">{{ item.genre }}</span>{% endif %}
+              {% if item.note %}{{ item.note }}{% endif %}
+            </p>
+          {% endif %}
+          {% if item.cta_text and item.cta_url %}
+            <a class="apple-gallery__cta" href="{{ item.cta_url }}">{{ item.cta_text }}</a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>

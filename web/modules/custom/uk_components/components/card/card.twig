@@ -1,0 +1,47 @@
+{# web/modules/custom/uk_components/components/card/card.twig #}
+
+{# Map Canvas props to CSS classes #}
+{% set speed = glow_speed|default('normal') %}
+{% set intensity = glow_intensity|default('high') %}
+
+{% set classes = [
+  'card',
+  'card--rainbow',
+  speed == 'fast' ? 'card--glow-fast' : (speed == 'slow' ? 'card--glow-slow' : 'card--glow-normal'),
+  intensity == 'low' ? 'card--glow-dim' : (intensity == 'medium' ? 'card--glow-med' : 'card--glow-high')
+]|join(' ') %}
+
+{% if url %}
+  <a href="{{ url }}" class="{{ classes }}" aria-label="{{ title }}">
+{% else %}
+  <article class="{{ classes }}">
+{% endif %}
+
+  {% if image and image.src %}
+    <img
+      class="card__img"
+      src="{{ image.src }}"
+      alt="{{ image.alt|default('') }}"
+      {% if image.width %}width="{{ image.width }}"{% endif %}
+      {% if image.height %}height="{{ image.height }}"{% endif %}
+      loading="lazy"
+      decoding="async"
+    />
+  {% endif %}
+
+  <div class="card__content">
+    <h3 class="card__title">{{ title }}</h3>
+    {% if text %}
+      <p class="card__text">{{ text }}</p>
+    {% endif %}
+
+    {% if actions %}
+      <div class="card__actions">{{ actions }}</div>
+    {% endif %}
+  </div>
+
+{% if url %}
+  </a>
+{% else %}
+  </article>
+{% endif %}

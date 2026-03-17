@@ -1,0 +1,61 @@
+uuid: a1380129-512a-4634-a776-9f6fe23a2e20
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - uk_components
+active_version: edd64a9ad4c66df5
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'Endless entertainment.'
+          expression: ℹ︎string␟value
+        theme:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  a2c9c1a3be5f324f:
+    settings:
+      prop_field_definitions:
+        title:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        theme:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Apple Gallery'
+id: sdc.uk_components.apple-gallery
+provider: uk_components
+source: sdc
+source_local_id: 'uk_components:apple-gallery'
+category: Apple

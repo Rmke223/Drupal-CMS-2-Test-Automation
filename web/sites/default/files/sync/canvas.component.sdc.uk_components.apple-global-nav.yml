@@ -1,0 +1,81 @@
+uuid: 19589a56-c455-4e8e-8ef1-751f40d32a38
+langcode: en
+status: true
+dependencies:
+  module:
+    - uk_components
+active_version: b11f503ca87f86e7
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        logo_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Apple
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: Logo
+          description: 'Optional SVG or image logo.'
+        promo:
+          title: Promo
+          description: 'Optional promo message above the nav.'
+        links:
+          title: Links
+          description: 'Primary nav links (use Apple Nav Link components).'
+        utility_links:
+          title: 'Utility links'
+          description: 'Utility nav links (use Apple Nav Link components).'
+  81da4c24e01e735b:
+    settings:
+      prop_field_definitions:
+        logo_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: Apple
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: Logo
+          description: 'Optional SVG or image logo.'
+        promo:
+          title: Promo
+          description: 'Optional promo message above the nav.'
+  a24ba546e4241cdf:
+    settings:
+      prop_field_definitions:
+        logo_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: Logo
+          description: 'Optional SVG or image logo.'
+        promo:
+          title: Promo
+          description: 'Optional promo message above the nav.'
+label: 'Apple Global Nav'
+id: sdc.uk_components.apple-global-nav
+provider: uk_components
+source: sdc
+source_local_id: 'uk_components:apple-global-nav'
+category: Apple

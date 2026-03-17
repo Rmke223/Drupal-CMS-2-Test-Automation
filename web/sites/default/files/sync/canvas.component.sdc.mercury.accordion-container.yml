@@ -1,0 +1,22 @@
+uuid: 47bdb394-ef42-4a58-8136-8eab1c6682e0
+langcode: en
+status: true
+dependencies:
+  theme:
+    - mercury
+active_version: 6d6367123c15a82a
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }
+    fallback_metadata:
+      slot_definitions:
+        accordion_content:
+          title: 'Accordion content'
+          description: 'Child content, only one of whose Collapsible Sections can be open at a time.'
+label: 'Accordion Container'
+id: sdc.mercury.accordion-container
+provider: mercury
+source: sdc
+source_local_id: 'mercury:accordion-container'
+category: Components/Expandable

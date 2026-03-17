@@ -1,0 +1,34 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Global Nav
+status: experimental
+group: Apple
+description: Top navigation bar inspired by apple.com.
+
+props:
+  type: object
+  properties:
+    logo_label:
+      type: string
+      title: Logo label
+      default: "Apple"
+      examples: ["Apple"]
+
+slots:
+  logo:
+    title: Logo
+    description: Optional SVG or image logo.
+  promo:
+    title: Promo
+    description: Optional promo message above the nav.
+  links:
+    title: Links
+    description: Primary nav links (use Apple Nav Link components).
+  utility_links:
+    title: Utility links
+    description: Utility nav links (use Apple Nav Link components).
+
+libraryOverrides:
+  css:
+    component:
+      apple-global-nav.css: {}

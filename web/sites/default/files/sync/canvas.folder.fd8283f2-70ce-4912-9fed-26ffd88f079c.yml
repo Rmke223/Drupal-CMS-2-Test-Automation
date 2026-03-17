@@ -1,0 +1,14 @@
+uuid: fd8283f2-70ce-4912-9fed-26ffd88f079c
+langcode: en
+status: true
+dependencies: {  }
+name: Base
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.mercury.badge
+  - sdc.mercury.blockquote
+  - sdc.mercury.button
+  - sdc.mercury.heading
+  - sdc.mercury.image
+  - sdc.mercury.text

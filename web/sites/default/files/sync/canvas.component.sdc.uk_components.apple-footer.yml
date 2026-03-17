@@ -1,0 +1,78 @@
+uuid: ec81884f-6790-4ef8-bebf-ef485b7286ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - uk_components
+active_version: c15f56274007024e
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        locale_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'United States'
+          expression: ℹ︎string␟value
+        locale_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: /choose-country-region/
+          expression: ℹ︎string␟value
+        footer_note:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: 'More ways to shop: Find an Apple Store or other retailer near you.'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+  ca79908578886fee:
+    settings:
+      prop_field_definitions:
+        locale_label:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        locale_url:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+        footer_note:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value: null
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Apple Footer'
+id: sdc.uk_components.apple-footer
+provider: uk_components
+source: sdc
+source_local_id: 'uk_components:apple-footer'
+category: Apple

@@ -1,0 +1,8 @@
+{# Apple section wrapper #}
+{% set section_padding = padding|default('normal') %}
+{% set section_theme = theme|default('light') %}
+{% set section_style = background_color ? 'background-color:' ~ background_color ~ ';' : '' %}
+
+<section class="apple-section apple-section--{{ section_padding }} apple-section--{{ section_theme }}" style="{{ section_style }}">
+  {{ content }}
+</section>

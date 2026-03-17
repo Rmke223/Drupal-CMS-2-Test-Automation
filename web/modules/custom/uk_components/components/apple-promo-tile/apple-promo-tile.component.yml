@@ -1,0 +1,64 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Promo Tile
+status: experimental
+group: Apple
+description: Promo tile with background image, copy, and CTAs.
+
+props:
+  type: object
+  required: [headline]
+  properties:
+    headline:
+      type: string
+      title: Headline
+      examples: ["MacBook Air"]
+    subhead:
+      type: string
+      title: Subhead
+      examples: ["Lean. Mean. M3 machine."]
+    eyebrow:
+      type: string
+      title: Eyebrow
+      examples: ["New"]
+    theme:
+      type: string
+      title: Theme
+      enum: [light, dark]
+      default: light
+    align:
+      type: string
+      title: Text alignment
+      enum: [center, left]
+      default: center
+    min_height:
+      type: string
+      title: Minimum height
+      examples: ["420px"]
+    background_image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Background image
+    logo_image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Logo image
+
+slots:
+  logo:
+    title: Logo
+    description: Optional custom logo markup.
+  cta_primary:
+    title: Primary CTA
+    description: Primary call to action.
+  cta_secondary:
+    title: Secondary CTA
+    description: Secondary call to action.
+  footnote:
+    title: Footnote
+    description: Footnote or legal copy.
+
+libraryOverrides:
+  css:
+    component:
+      apple-promo-tile.css: {}

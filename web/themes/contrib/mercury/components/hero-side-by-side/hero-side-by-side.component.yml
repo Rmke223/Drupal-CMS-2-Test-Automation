@@ -1,0 +1,167 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json"
+name: Hero side-by-side
+description: Hero with side-by-side slots for media and content.
+group: Layout
+props:
+  type: object
+  properties:
+    hero_flex_gap:
+      type: string
+      title: Flex gap
+      enum:
+        - large
+        - extra-large
+      meta:enum:
+        large: Large (default)
+        extra-large: Extra-Large
+      default: large
+      examples:
+        - "large"
+    hero_flex_direction_mobile:
+      type: string
+      title: Mobile flex direction
+      enum:
+        - vertical
+        - vertical-reverse
+      meta:enum:
+        vertical: Vertical
+        vertical-reverse: Reverse vertical
+      default: vertical
+      examples:
+        - "vertical"
+    background:
+      type: string
+      title: Background color
+      enum:
+        - brand
+        - brand-light
+        - brand-dark
+        - accent
+        - accent-light
+        - accent-dark
+      meta:enum:
+        brand: Brand
+        brand-light: Brand Light
+        brand-dark: Brand Dark
+        accent: Accent
+        accent-light: Accent Light
+        accent-dark: Accent Dark
+    padding_block_start:
+      type: string
+      title: Padding top
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    padding_block_end:
+      type: string
+      title: Padding bottom
+      enum:
+        - "0"
+        - "16"
+        - "32"
+        - "64"
+      examples:
+        - "0"
+    image_size:
+      type: string
+      title: Image size
+      description: Set the image aspect ratio
+      enum:
+        - "2:1"
+        - "16:9"
+        - "3:2"
+        - "4:3"
+        - "1:1"
+      meta:enum:
+        "2:1": 2 × 1
+        "16:9": 16 × 9
+        "3:2": 3 × 2
+        "4:3": 4 × 3
+        "1:1": Square
+      default: "4:3"
+      examples:
+        - "4:3"
+    image_position:
+      type: string
+      title: Image position
+      description: Set the image position
+      enum:
+        - left
+        - right
+      meta:enum:
+        left: Left
+        right: Right
+      default: left
+      examples:
+        - "left"
+    image_radius:
+      type: string
+      title: Image border radius
+      description: Set the image border radius
+      enum:
+        - small
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        large: Large
+        extra-large: Extra-Large
+      default: small
+      examples:
+        - "small"
+    slot_flex_align:
+      type: string
+      title: Slot align content
+      enum:
+        - start
+        - center
+        - end
+      meta:enum:
+        start: Start
+        center: Center
+        end: End
+      default: center
+      examples:
+        - "center"
+    slot_flex_direction:
+      type: string
+      title: Slot flex direction
+      enum:
+        - vertical
+        - vertical-reverse
+      meta:enum:
+        vertical: Vertical
+        vertical-reverse: Vertical (reverse)
+      default: vertical
+      examples:
+        - "vertical"
+    slot_flex_gap:
+      type: string
+      title: Slot flex gap
+      enum:
+        - small
+        - medium
+        - large
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      default: small
+      examples:
+        - "small"
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Media Image
+      description: Media image for the hero.
+      type: object
+      examples:
+        - src: "assets/boliviainteligente-QPu42AAJ5ZY-unsplash.jpg"
+          alt: "Placeholder image"
+
+slots:
+  hero_slot:
+    title: "Content"

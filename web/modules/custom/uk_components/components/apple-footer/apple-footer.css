@@ -1,0 +1,64 @@
+.apple-footer {
+  background: var(--apple-light, #f5f5f7);
+  color: var(--apple-gray, #6e6e73);
+  padding: 50px 20px 30px;
+  font-size: 0.85rem;
+}
+
+.apple-footer__note {
+  max-width: 900px;
+  margin: 0 auto 24px;
+}
+
+.apple-footer__grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  margin-bottom: 30px;
+}
+
+.apple-footer__heading {
+  font-size: 0.9rem;
+  color: var(--apple-black, #1d1d1f);
+  margin: 0 0 10px;
+}
+
+.apple-footer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.apple-footer__list a {
+  color: inherit;
+}
+
+.apple-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  border-top: 1px solid var(--apple-border, rgba(0, 0, 0, 0.08));
+  padding-top: 16px;
+}
+
+.apple-footer__legal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.apple-footer__locale {
+  color: var(--apple-black, #1d1d1f);
+}
+
+@media (min-width: 900px) {
+  .apple-footer {
+    padding: 60px 5vw 40px;
+  }
+}

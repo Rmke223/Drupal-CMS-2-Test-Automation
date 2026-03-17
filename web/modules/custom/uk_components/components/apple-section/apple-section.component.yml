@@ -1,0 +1,35 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Section
+status: experimental
+group: Apple
+description: Spacing and background wrapper for Apple-style sections.
+
+props:
+  type: object
+  properties:
+    padding:
+      type: string
+      title: Padding
+      enum: [none, tight, normal, roomy]
+      default: normal
+    theme:
+      type: string
+      title: Text theme
+      enum: [light, dark]
+      default: light
+    background_color:
+      type: string
+      title: Background color
+      description: Optional custom background color.
+      examples: ["#000000", "#f5f5f7"]
+
+slots:
+  content:
+    title: Content
+    description: Section content.
+
+libraryOverrides:
+  css:
+    component:
+      apple-section.css: {}

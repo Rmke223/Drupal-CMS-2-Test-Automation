@@ -1,0 +1,45 @@
+{% set button_id = 'collapsible-section--title'|clean_unique_id %}
+{% set content_id = 'collapsible-section--content'|clean_unique_id %}
+{% set heading_level = heading_level|default('3') %}
+
+<div class="collapsible-section hg:overflow-hidden" data-open-by-default="{{ open_by_default ? 'true' : 'false' }}">
+  {# The heading tag is necessary for accessibility reasons. #}
+  {% set heading_class = 'hg:text-2xl' %}
+  {% set button_content %}
+    <button
+      id="{{ button_id }}"
+      aria-controls="{{ content_id }}"
+      class="collapsible-section--title hg:flex hg:w-full hg:cursor-pointer hg:items-center hg:justify-between hg:p-4 hg:text-left"
+    >
+      {{ title }}
+      <i class="collapsible-section--icon ph-bold ph-caret-down hg:transition-transform hg:duration-(--animate-speed)"></i>
+    </button>
+  {% endset %}
+
+  {% if heading_level == '1' %}
+    <h1 class="{{ heading_class }}">{{ button_content }}</h1>
+  {% elseif heading_level == '2' %}
+    <h2 class="{{ heading_class }}">{{ button_content }}</h2>
+  {% elseif heading_level == '3' %}
+    <h3 class="{{ heading_class }}">{{ button_content }}</h3>
+  {% elseif heading_level == '4' %}
+    <h4 class="{{ heading_class }}">{{ button_content }}</h4>
+  {% elseif heading_level == '5' %}
+    <h5 class="{{ heading_class }}">{{ button_content }}</h5>
+  {% elseif heading_level == '6' %}
+    <h6 class="{{ heading_class }}">{{ button_content }}</h6>
+  {% else %}
+    <h3 class="{{ heading_class }}">{{ button_content }}</h3>
+  {% endif %}
+
+  <div
+    class="collapsible-section--content hg:transition-[height, padding] hg:px-4 hg:duration-(--animate-speed)"
+    id="{{ content_id }}"
+    role="region"
+    aria-labelledby="{{ button_id }}"
+  >
+    {% block collapsible_content %}
+      {{ storybook.content }}
+    {% endblock %}
+  </div>
+</div>

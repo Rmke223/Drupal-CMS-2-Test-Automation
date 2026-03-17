@@ -1,0 +1,63 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Footer
+status: experimental
+group: Apple
+description: Footer with directory columns and legal links.
+
+props:
+  type: object
+  properties:
+    columns:
+      type: array
+      title: Columns
+      items:
+        type: object
+        required: [title, links]
+        properties:
+          title:
+            type: string
+            examples: ["Shop and Learn"]
+          links:
+            type: array
+            items:
+              type: object
+              required: [title, url]
+              properties:
+                title:
+                  type: string
+                  examples: ["Store"]
+                url:
+                  type: string
+                  examples: ["/us/shop/goto/store"]
+    legal_links:
+      type: array
+      title: Legal links
+      items:
+        type: object
+        required: [title, url]
+        properties:
+          title:
+            type: string
+            examples: ["Privacy Policy"]
+          url:
+            type: string
+            examples: ["/legal/privacy/"]
+    locale_label:
+      type: string
+      title: Locale label
+      default: "United States"
+      examples: ["United States"]
+    locale_url:
+      type: string
+      title: Locale URL
+      examples: ["/choose-country-region/"]
+    footer_note:
+      type: string
+      title: Footer note
+      examples: ["More ways to shop: Find an Apple Store or other retailer near you."]
+
+libraryOverrides:
+  css:
+    component:
+      apple-footer.css: {}

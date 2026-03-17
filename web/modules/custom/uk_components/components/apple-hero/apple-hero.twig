@@ -1,0 +1,45 @@
+{# Apple hero component #}
+{% set hero_theme = theme|default('light') %}
+{% set hero_layout = layout|default('center') %}
+{% set media_align = media_alignment|default('center') %}
+{% set hero_style = '' %}
+{% if background_image and background_image.src %}
+  {% set hero_style = 'background-image:url(' ~ background_image.src ~ ');' %}
+{% endif %}
+
+<section class="apple-hero apple-hero--{{ hero_layout }} apple-hero--{{ hero_theme }}" style="{{ hero_style }}">
+  <div class="apple-hero__inner">
+    <div class="apple-hero__copy">
+      {% if logo %}
+        <div class="apple-hero__logo">{{ logo }}</div>
+      {% endif %}
+      {% if eyebrow %}
+        <p class="apple-hero__eyebrow">{{ eyebrow }}</p>
+      {% endif %}
+      <h2 class="apple-hero__headline">{{ headline }}</h2>
+      {% if subhead %}
+        <p class="apple-hero__subhead">{{ subhead }}</p>
+      {% endif %}
+      <div class="apple-hero__ctas">
+        {% if cta_primary %}{{ cta_primary }}{% endif %}
+        {% if cta_secondary %}{{ cta_secondary }}{% endif %}
+      </div>
+      {% if footnote %}
+        <div class="apple-hero__footnote">{{ footnote }}</div>
+      {% endif %}
+    </div>
+
+    {% if media or (image and image.src) %}
+      <div class="apple-hero__media apple-hero__media--{{ media_align }}">
+        {% if media %}
+          {{ media }}
+        {% else %}
+          <img src="{{ image.src }}" alt="{{ image.alt|default('') }}"
+            {% if image.width %}width="{{ image.width }}"{% endif %}
+            {% if image.height %}height="{{ image.height }}"{% endif %}
+            loading="lazy" decoding="async" />
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>

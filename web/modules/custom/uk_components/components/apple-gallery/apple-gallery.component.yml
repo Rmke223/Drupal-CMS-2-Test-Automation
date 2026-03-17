@@ -1,0 +1,53 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Gallery
+status: experimental
+group: Apple
+description: Horizontal media gallery for Apple TV+ style cards.
+
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      default: "Endless entertainment."
+      examples: ["Endless entertainment."]
+    theme:
+      type: string
+      title: Theme
+      enum: [light, dark]
+      default: dark
+    items:
+      type: array
+      title: Gallery items
+      items:
+        type: object
+        required: [title, image]
+        properties:
+          title:
+            type: string
+            examples: ["Hijack"]
+          genre:
+            type: string
+            examples: ["Thriller"]
+          note:
+            type: string
+            examples: ["New season."]
+          cta_text:
+            type: string
+            examples: ["Stream now"]
+          cta_url:
+            type: string
+            examples: ["https://tv.apple.com/"]
+          image:
+            $ref: json-schema-definitions://canvas.module/image
+            type: object
+          logo_image:
+            $ref: json-schema-definitions://canvas.module/image
+            type: object
+
+libraryOverrides:
+  css:
+    component:
+      apple-gallery.css: {}

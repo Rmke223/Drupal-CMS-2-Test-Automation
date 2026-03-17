@@ -1,0 +1,37 @@
+<div class="hours-today">
+  <div class="slab">
+    <div class="slab__wrapper hours-today__inner">
+      <h2>
+        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4898 0C14.6624 0 17.535 1.28622 19.6143 3.36585C21.6934 5.4453 22.9795 8.318 22.9795 11.4912C22.9795 14.6637 21.6934 17.5357 19.6142 19.6147C17.5349 21.6937 14.6624 22.9795 11.4898 22.9795C8.31712 22.9795 5.44462 21.6937 3.36531 19.6147C1.28609 17.5357 0 14.6637 0 11.4912C0 8.318 1.28607 5.4453 3.36523 3.36585C5.44456 1.28622 8.3171 0 11.4898 0ZM11.4898 2.35294C8.96646 2.35294 6.68233 3.37576 5.02898 5.02939C3.37553 6.68312 2.35294 8.96775 2.35294 11.4912C2.35294 14.014 3.3756 16.2984 5.02918 17.9519C6.68251 19.6053 8.96656 20.628 11.4898 20.628C14.0129 20.628 16.297 19.6053 17.9503 17.9519C19.6039 16.2984 20.6266 14.014 20.6266 11.4912C20.6266 8.96775 19.604 6.68312 17.9505 5.02939C16.2972 3.37576 14.013 2.35294 11.4898 2.35294ZM11.4898 4.08498C11.9012 4.08498 12.2729 4.2517 12.5419 4.52114C12.8108 4.79041 12.977 5.16247 12.977 5.5737V10.8766L16.7236 14.6232C17.0137 14.9133 17.1589 15.2939 17.1589 15.6745C17.1589 16.0551 17.0137 16.4357 16.7255 16.7239C16.4349 17.017 16.0525 17.1618 15.6723 17.1618C15.2896 17.1618 14.9098 17.017 14.6211 16.7259L10.437 12.5432C10.1435 12.2496 10.0006 11.8655 10.0024 11.4801V5.5737C10.0024 5.16247 10.1687 4.79041 10.4376 4.52114C10.7066 4.2517 11.0783 4.08498 11.4898 4.08498Z" fill="black"/></svg>
+        <span>Today's Hours</span>
+      </h2>
+      <div class="hours-today__selector">
+        {% if locations|keys|length > 1 %}
+          <label><span class="visually-hidden">Select a location</span>
+            <select name="location-selector">
+              {% for lid in locations|keys %}
+                <option value="{{ lid }}">{{ locations[lid].name }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        {% else %}
+          {{ locations[locations|keys|first].name }}
+        {% endif %}
+      </div>
+      <div class="hours-today__hours">
+        {% if locations|keys|length > 1 %}
+          {% for lid in locations|keys %}
+            <div class="hours-today__location-hours" data-lid="{{ lid }}">
+              {{ locations[lid].info }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {{ locations[locations|keys|first].info }}
+        {% endif %}
+      </div>
+      <div>
+        <a class="hours-today__all-hours" href="{{ all_hours_url }}">{{ all_hours_title }}</a>
+      </div>
+    </div>
+  </div>
+</div>

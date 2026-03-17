@@ -1,0 +1,81 @@
+/* web/modules/custom/uk_components/components/card/card.css */
+
+/* ------- Base ------- */
+.card {
+  position: relative;
+  display: block;
+  background: #fff;
+  border: 1px solid #e5e7eb;               /* gray-200 */
+  border-radius: 0.75rem;                   /* 12px */
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+
+  /* Ensure the glow can extend outside */
+  overflow: visible;
+  z-index: 0;
+  isolation: isolate;                       /* keep pseudo behind content cleanly */
+}
+
+/* ------- Content bits ------- */
+.card__img { display:block; width:100%; height:auto; object-fit:cover; }
+.card__title { margin:.5rem 0 .25rem; font-size:1.125rem; line-height:1.3; }
+.card__text { margin:.25rem 0 .5rem; color:#374151; }  /* gray-700 */
+.card__actions { margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; }
+
+/* ------- Controls via CSS vars ------- */
+.card--rainbow { --glow-speed: 3s; --glow-opacity: .9; }
+.card--glow-fast   { --glow-speed: 1.6s; }
+.card--glow-normal { --glow-speed: 3s; }
+.card--glow-slow   { --glow-speed: 6s; }
+
+.card--glow-dim  { --glow-opacity: .45; }
+.card--glow-med  { --glow-opacity: .70; }
+.card--glow-high { --glow-opacity: .90; }
+
+/* ------- Rainbow hover glow layer ------- */
+.card--rainbow::before {
+  content: "";
+  position: absolute;
+  inset: -8px;                              /* extend past card for glow radius */
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0turn,
+    #ff0040, #ff7a00, #ffd400, #7fff00, #00e5ff, #3b82f6, #8b5cf6, #ff00e5, #ff0040
+  );
+  filter: blur(14px);
+  opacity: 0;
+  transform: scale(.98) translateZ(0);
+  transition: opacity .2s ease, transform .2s ease;
+  animation: rainbow-spin var(--glow-speed) linear infinite paused;
+  z-index: -1;                               /* sits behind the white card */
+  will-change: transform;
+}
+
+/* Activate on hover/focus */
+.card--rainbow:hover::before,
+.card--rainbow:focus-visible::before,
+.card--rainbow:focus-within::before {
+  opacity: var(--glow-opacity);
+  transform: scale(1) translateZ(0);
+  animation-play-state: running;
+}
+
+/* Subtle lift on the card itself */
+.card--rainbow:hover,
+.card--rainbow:focus-visible,
+.card--rainbow:focus-within {
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  border-color: #d1d5db;                    /* gray-300 */
+}
+
+/* Spin animation */
+@keyframes rainbow-spin {
+  to { transform: scale(.98) rotate(1turn) translateZ(0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card--rainbow::before { animation: none !important; }
+}

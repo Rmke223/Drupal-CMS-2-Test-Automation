@@ -1,0 +1,37 @@
+{# Apple promo tile #}
+{% set tile_theme = theme|default('light') %}
+{% set tile_align = align|default('center') %}
+{% set tile_style = '' %}
+{% if background_image and background_image.src %}
+  {% set tile_style = tile_style ~ 'background-image:url(' ~ background_image.src ~ ');' %}
+{% endif %}
+{% if min_height %}
+  {% set tile_style = tile_style ~ 'min-height:' ~ min_height ~ ';' %}
+{% endif %}
+
+<article class="apple-promo-tile apple-promo-tile--{{ tile_theme }} apple-promo-tile--{{ tile_align }}" style="{{ tile_style }}">
+  <div class="apple-promo-tile__content">
+    {% if logo %}
+      <div class="apple-promo-tile__logo">{{ logo }}</div>
+    {% elseif logo_image and logo_image.src %}
+      <img class="apple-promo-tile__logo-image" src="{{ logo_image.src }}" alt="{{ logo_image.alt|default('') }}"
+        {% if logo_image.width %}width="{{ logo_image.width }}"{% endif %}
+        {% if logo_image.height %}height="{{ logo_image.height }}"{% endif %}
+        loading="lazy" decoding="async" />
+    {% endif %}
+    {% if eyebrow %}
+      <p class="apple-promo-tile__eyebrow">{{ eyebrow }}</p>
+    {% endif %}
+    <h3 class="apple-promo-tile__headline">{{ headline }}</h3>
+    {% if subhead %}
+      <p class="apple-promo-tile__subhead">{{ subhead }}</p>
+    {% endif %}
+    <div class="apple-promo-tile__ctas">
+      {% if cta_primary %}{{ cta_primary }}{% endif %}
+      {% if cta_secondary %}{{ cta_secondary }}{% endif %}
+    </div>
+    {% if footnote %}
+      <div class="apple-promo-tile__footnote">{{ footnote }}</div>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,38 @@
+uuid: e2341fd8-5e40-4e21-b86c-28cf201a0b47
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+  theme:
+    - mercury
+active_version: 1ec577f9bf46e4f9
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        menu_align:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value:
+            -
+              value: center
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        logo:
+          title: 'Site logo'
+        navigation:
+          title: 'Navigation menu'
+        links:
+          title: 'Misc. CTAs'
+label: Navbar
+id: sdc.mercury.navbar
+provider: mercury
+source: sdc
+source_local_id: 'mercury:navbar'
+category: Navigation

@@ -1,0 +1,30 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Promo Grid
+status: experimental
+group: Apple
+description: Grid wrapper for promo tiles.
+
+props:
+  type: object
+  properties:
+    columns:
+      type: integer
+      title: Columns
+      enum: [2, 3]
+      default: 2
+    gap:
+      type: string
+      title: Gap size
+      enum: [tight, normal, roomy]
+      default: normal
+
+slots:
+  items:
+    title: Items
+    description: Promo tile components.
+
+libraryOverrides:
+  css:
+    component:
+      apple-promo-grid.css: {}

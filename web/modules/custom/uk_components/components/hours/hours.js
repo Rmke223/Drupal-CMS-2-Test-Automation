@@ -1,0 +1,21 @@
+(function($) {
+  const updateHours = ($parent, $select) => {
+    const lid = $select.val();
+    $parent.find('.hours-today__location-hours').hide();
+    $parent.find('.hours-today__location-hours[data-lid="' + lid + '"]').fadeIn();
+  };
+
+  const setupHours = () => {
+    $('.hours-today').each((i, el) => {
+      const $h = $(el);
+      const $select = $h.find('select');
+      $select.on('change', (e) => {
+        e.preventDefault();
+        updateHours($h, $(e.target));
+      });
+      updateHours($h, $select);
+    });
+  }
+
+  setupHours();
+})(jQuery);

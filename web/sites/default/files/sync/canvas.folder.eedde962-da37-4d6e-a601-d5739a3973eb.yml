@@ -1,0 +1,18 @@
+uuid: eedde962-da37-4d6e-a601-d5739a3973eb
+langcode: en
+status: true
+dependencies: {  }
+name: Apple
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.uk_components.apple-button
+  - sdc.uk_components.apple-footer
+  - sdc.uk_components.apple-gallery
+  - sdc.uk_components.apple-global-nav
+  - sdc.uk_components.apple-hero
+  - sdc.uk_components.apple-nav-link
+  - sdc.uk_components.apple-promo-grid
+  - sdc.uk_components.apple-promo-tile
+  - sdc.uk_components.apple-section
+  - sdc.uk_components.apple-shell

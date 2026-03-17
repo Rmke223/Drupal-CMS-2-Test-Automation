@@ -1,0 +1,32 @@
+uuid: e61ad7ad-2f65-46a9-8264-228e5816e85d
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - uk_components
+active_version: e92a2de73fda264b
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        theme:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Page content.'
+label: 'Apple Shell'
+id: sdc.uk_components.apple-shell
+provider: uk_components
+source: sdc
+source_local_id: 'uk_components:apple-shell'
+category: Apple

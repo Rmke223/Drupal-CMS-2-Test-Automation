@@ -1,0 +1,32 @@
+{# Apple footer #}
+<footer class="apple-footer">
+  {% if footer_note %}
+    <div class="apple-footer__note">{{ footer_note }}</div>
+  {% endif %}
+
+  <div class="apple-footer__grid">
+    {% for column in columns|default([]) %}
+      <div class="apple-footer__column">
+        <h3 class="apple-footer__heading">{{ column.title }}</h3>
+        <ul class="apple-footer__list" role="list">
+          {% for link in column.links|default([]) %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="apple-footer__bottom">
+    {% if locale_url %}
+      <a class="apple-footer__locale" href="{{ locale_url }}">{{ locale_label }}</a>
+    {% else %}
+      <span class="apple-footer__locale">{{ locale_label }}</span>
+    {% endif %}
+    <ul class="apple-footer__legal" role="list">
+      {% for link in legal_links|default([]) %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</footer>

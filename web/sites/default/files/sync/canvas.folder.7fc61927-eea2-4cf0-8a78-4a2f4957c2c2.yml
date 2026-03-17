@@ -1,0 +1,13 @@
+uuid: 7fc61927-eea2-4cf0-8a78-4a2f4957c2c2
+langcode: en
+status: true
+dependencies: {  }
+name: Navigation
+configEntityTypeId: component
+weight: 0
+items:
+  - block.navigation_link
+  - block.navigation_shortcuts
+  - block.navigation_user
+  - sdc.mercury.navbar
+  - sdc.mercury.pager

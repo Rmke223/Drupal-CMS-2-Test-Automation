@@ -1,0 +1,30 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Hours
+group: UI
+status: stable
+description: Hours component
+props:
+  type: object
+  required:
+    - all_hours_url
+    - all_hours_title
+  properties:
+    all_hours_url:
+      type: string
+      title: All hours URL
+      description: Destination for the “All hours” link.
+      format: uri-reference
+      x-allowed-schemes: [http, https]
+      examples:
+        - "/hours"
+    all_hours_title:
+      type: string
+      title: All hours link text
+      description: Text for the “All hours” link.
+      examples:
+        - "All hours"
+slots:
+  locations:
+    title: Locations
+    description: Locations

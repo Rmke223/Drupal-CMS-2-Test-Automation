@@ -1,0 +1,87 @@
+uuid: 911d5a24-eded-4042-b7e0-4730ff5d867f
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - uk_components
+active_version: 509a7e10fd264295
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        padding:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        theme:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        background_color:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '#000000'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Section content.'
+  5fbcda8ff24f8129:
+    settings:
+      prop_field_definitions:
+        padding:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        theme:
+          required: false
+          field_type: list_string
+          field_storage_settings:
+            allowed_values_function: canvas_load_allowed_values_for_component_prop
+          field_instance_settings: {  }
+          field_widget: options_select
+          default_value: null
+          expression: ℹ︎list_string␟value
+        background_color:
+          required: false
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            -
+              value: '#000000'
+          expression: ℹ︎string␟value
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'Section content.'
+label: 'Apple Section'
+id: sdc.uk_components.apple-section
+provider: uk_components
+source: sdc
+source_local_id: 'uk_components:apple-section'
+category: Apple

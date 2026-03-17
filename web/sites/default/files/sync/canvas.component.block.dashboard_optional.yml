@@ -1,0 +1,21 @@
+uuid: e2609ac5-eeed-477d-b5e8-72a40f4553dc
+langcode: en
+status: false
+dependencies: {  }
+active_version: aece614b02269895
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: dashboard_optional
+        label: 'Optional dashboard block'
+        label_display: '0'
+        provider: drupal_cms_helper
+    fallback_metadata:
+      slot_definitions: null
+label: 'Optional dashboard block'
+id: block.dashboard_optional
+provider: drupal_cms_helper
+source: block
+source_local_id: dashboard_optional
+category: Dashboard

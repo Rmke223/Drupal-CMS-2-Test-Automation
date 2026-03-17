@@ -1,0 +1,25 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Shell
+status: experimental
+group: Apple
+description: Page wrapper with Apple-style design tokens and base styles.
+
+props:
+  type: object
+  properties:
+    theme:
+      type: string
+      title: Theme
+      enum: [light, dark]
+      default: light
+
+slots:
+  content:
+    title: Content
+    description: Page content.
+
+libraryOverrides:
+  css:
+    component:
+      apple-shell.css: {}

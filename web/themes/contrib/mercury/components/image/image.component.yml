@@ -1,0 +1,52 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+description: An image component.
+group: Base
+props:
+  type: object
+  properties:
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Image
+      description: Media and Alt for the card.
+      type: object
+      examples:
+        - src: "assets/957040.jpg"
+          alt: "Placeholder text."
+    size:
+      title: Aspect ratio
+      description: Width:height proportions of the image. Listed from most horizontal to most vertical.
+      type: string
+      enum:
+        - "2:1"
+        - 16:9
+        - 3:2
+        - 4:3
+        - 1:1
+      meta:enum:
+        2:1: "2×1"
+        16:9: "16×9"
+        3:2: "3×2"
+        4:3: "4×3"
+        1:1: Square
+      default: "4:3"
+      examples:
+        - "4:3"
+    radius:
+      type: string
+      title: Image radius
+      description: Image corner radius
+      enum:
+        - small
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        large: Large
+        extra-large: Extra large
+      examples:
+        - "small"
+    caption:
+      title: Caption
+      description: Set optional caption
+      type: string

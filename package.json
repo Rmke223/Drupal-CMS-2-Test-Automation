@@ -1,0 +1,32 @@
+{
+  "name": "my-cms2-site-tests",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test:pw": "playwright test -c testing/playwright/playwright.config.ts",
+    "test:pw:site": "playwright test -c testing/playwright/playwright.config.ts",
+    "test:pw:ci": "playwright test -c testing/playwright/playwright.config.ts --reporter=github,html",
+    "test:pw:list": "playwright test -c testing/playwright/playwright.config.ts --list",
+    "test:pw:smoke": "playwright test -c testing/playwright/playwright.config.ts --project=smoke-chromium",
+    "test:pw:e2e": "playwright test -c testing/playwright/playwright.config.ts --project=e2e-chromium",
+    "test:pw:api": "playwright test -c testing/playwright/playwright.config.ts --project=api-chromium",
+    "test:pw:a11y": "playwright test -c testing/playwright/playwright.config.ts --project=a11y-chromium",
+    "test:pw:visual": "playwright test -c testing/playwright/playwright.config.ts --project=visual-chromium",
+    "test:pw:visual:update": "playwright test -c testing/playwright/playwright.config.ts --project=visual-chromium --update-snapshots",
+    "test:pw:ui": "playwright test -c testing/playwright/playwright.config.ts --ui",
+    "test:pw:headed": "playwright test -c testing/playwright/playwright.config.ts --headed",
+    "test:pw:debug": "cross-env PWDEBUG=1 playwright test -c testing/playwright/playwright.config.ts --project=e2e-chromium",
+    "test:pw:seed": "node testing/playwright/scripts/seed-site.mjs",
+    "test:pw:ready": "node testing/playwright/scripts/ensure-site-ready.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.54.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.6.1",
+    "typescript": "^5.9.2"
+  }
+}

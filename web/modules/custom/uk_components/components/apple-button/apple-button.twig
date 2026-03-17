@@ -1,0 +1,20 @@
+{# Apple button component #}
+{% set button_style = style|default('primary') %}
+{% set button_size = size|default('regular') %}
+{% set classes = [
+  'apple-button',
+  'apple-button--' ~ button_style,
+  'apple-button--' ~ button_size
+]|join(' ') %}
+
+{% if url %}
+  <a href="{{ url }}" class="{{ classes }}">
+    {% if icon %}<span class="apple-button__icon">{{ icon }}</span>{% endif %}
+    <span class="apple-button__label">{{ label }}</span>
+  </a>
+{% else %}
+  <button class="{{ classes }}" type="button">
+    {% if icon %}<span class="apple-button__icon">{{ icon }}</span>{% endif %}
+    <span class="apple-button__label">{{ label }}</span>
+  </button>
+{% endif %}

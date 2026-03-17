@@ -1,0 +1,39 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Button
+status: experimental
+group: Apple
+description: Apple-style CTA button.
+
+props:
+  type: object
+  required: [label]
+  properties:
+    label:
+      type: string
+      title: Label
+      examples: ["Learn more"]
+    url:
+      type: string
+      title: URL
+      examples: ["/example"]
+    style:
+      type: string
+      title: Style
+      enum: [primary, secondary, tertiary]
+      default: primary
+    size:
+      type: string
+      title: Size
+      enum: [regular, large]
+      default: regular
+
+slots:
+  icon:
+    title: Icon
+    description: Optional icon next to the label.
+
+libraryOverrides:
+  css:
+    component:
+      apple-button.css: {}

@@ -1,0 +1,5 @@
+name: UK Components
+type: module
+description: SDC components for Canvas.
+core_version_requirement: ^11
+package: Custom

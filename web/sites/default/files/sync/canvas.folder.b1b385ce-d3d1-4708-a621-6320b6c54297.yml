@@ -1,0 +1,11 @@
+uuid: b1b385ce-d3d1-4708-a621-6320b6c54297
+langcode: en
+status: true
+dependencies: {  }
+name: UI
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.mercury.navbar-search
+  - sdc.uk_components.card
+  - sdc.uk_components.hours

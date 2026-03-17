@@ -1,0 +1,56 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Card
+status: stable
+group: UI
+description: Card with optional image, body text, actions, and a rainbow hover glow. Includes speed and intensity controls.
+
+props:
+  type: object
+  required: [title]
+  properties:
+    title:
+      type: string
+      title: Title
+      examples: ["Sample card"]
+    text:
+      type: string
+      title: Body text
+      examples: ["This is a short description."]
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      description: Optional card image rendered above the title.
+      examples:
+        - src: https://placehold.co/800x500
+          alt: Placeholder image
+          width: 800
+          height: 500
+    url:
+      type: string
+      title: Link URL
+      description: Make the whole card clickable by providing a URL.
+      examples: ["/example"]
+
+    glow_speed:
+      type: string
+      title: Glow speed
+      enum: [fast, normal, slow]
+      default: normal
+
+    glow_intensity:
+      type: string
+      title: Glow intensity
+      enum: [low, medium, high]
+      default: high
+
+slots:
+  actions:
+    title: Actions
+    description: Place buttons or links here.
+
+libraryOverrides:
+  css:
+    component:
+      card.css: {}

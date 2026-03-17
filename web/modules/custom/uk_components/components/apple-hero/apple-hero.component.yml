@@ -1,0 +1,68 @@
+$schema: "https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json"
+
+name: Apple Hero
+status: experimental
+group: Apple
+description: Hero banner with headline, copy, CTAs, and media.
+
+props:
+  type: object
+  required: [headline]
+  properties:
+    headline:
+      type: string
+      title: Headline
+      examples: ["iPhone"]
+    subhead:
+      type: string
+      title: Subhead
+      examples: ["Say hello to the latest generation of iPhone."]
+    eyebrow:
+      type: string
+      title: Eyebrow
+      examples: ["New"]
+    theme:
+      type: string
+      title: Theme
+      enum: [light, dark]
+      default: light
+    layout:
+      type: string
+      title: Layout
+      enum: [center, split]
+      default: center
+    media_alignment:
+      type: string
+      title: Media alignment
+      enum: [center, left, right, bottom]
+      default: center
+    background_image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Background image
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+
+slots:
+  logo:
+    title: Logo
+    description: Optional logo image/mark.
+  cta_primary:
+    title: Primary CTA
+    description: Primary call to action.
+  cta_secondary:
+    title: Secondary CTA
+    description: Secondary call to action.
+  footnote:
+    title: Footnote
+    description: Footnote or legal copy.
+  media:
+    title: Media
+    description: Optional custom media markup (video or picture).
+
+libraryOverrides:
+  css:
+    component:
+      apple-hero.css: {}

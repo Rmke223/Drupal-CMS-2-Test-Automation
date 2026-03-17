@@ -1,0 +1,58 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Text
+description: A component for rich text.
+group: Base
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Rich text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam.</p>
+    font_size_multiplier:
+      type: string
+      title: Text size
+      enum:
+        - text-scale-75
+        - text-scale-87
+        - normal
+        - text-scale-112
+        - text-scale-125
+        - text-scale-137
+        - text-scale-150
+      meta:enum:
+        text-scale-75: 12px
+        text-scale-87: 14px
+        normal: 16px (default)
+        text-scale-112: 18px
+        text-scale-125: 20px
+        text-scale-137: 22px
+        text-scale-150: 24px
+      default: normal
+      examples:
+        - normal
+    font_color:
+      type: string
+      title: Text color
+      enum:
+        - text-inherit
+        - dark
+        - light
+        - brand
+        - brand-light
+        - accent
+        - accent-light
+      meta:enum:
+        text-inherit: Default
+        dark: Dark
+        white: Light
+        brand: Brand
+        brand-light: Brand light
+        accent: Accent
+        accent-light: Accent light
+      default: text-inherit
+      examples:
+        - text-inherit

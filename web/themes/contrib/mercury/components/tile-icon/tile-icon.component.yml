@@ -1,0 +1,132 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon Tile
+description: A component showing its children in a grid on desktop and in a horizontally-scrolling line on mobile.
+group: Components
+props:
+  type: object
+  properties:
+    tile_size:
+      type: string
+      title: Tile aspect ratio
+      description: Set aspect ratio of the tile.
+      enum:
+        - square
+        - "4:3"
+        - "16:9"
+      meta:enum:
+        square: Square
+        "4:3": Rectangle 4 × 3
+        "16:9": Rectangle 16 × 9
+      examples:
+        - square
+    flex_align:
+      type: string
+      title: Alignment
+      description: Set alignment of the tile.
+      enum:
+        - start
+        - center
+        - end
+        - between
+      default:
+        - "center"
+      examples:
+        - "center"
+    border:
+      type: boolean
+      title: Border
+      description: Add a border to the tile.
+      default: TRUE
+      examples:
+        - TRUE
+    border_radius:
+      type: string
+      title: Border radius
+      description: Set rounded corner radius
+      enum:
+        - small
+        - large
+        - extra-large
+      meta:enum:
+        small: Small
+        large: Large
+        extra-large: Extra large
+      default: small
+      examples:
+        - small
+    background:
+      type: boolean
+      title: Background
+      description: Add a background to the tile.
+      default: FALSE
+      examples:
+        - FALSE
+    text:
+      type: string
+      title: Heading text
+      description: Add heading text to the tile.
+      examples:
+        - Heading
+    description:
+      type: string
+      title: Paragraph text
+      description: Add paragraph text to the tile.
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - "<p>This is placeholder text.</p>"
+    text_align:
+      type: string
+      title: Text alignment
+      description: Set text alignment of the tile.
+      enum:
+        - left
+        - center
+        - right
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center
+    url:
+      type: string
+      title: Link
+    icon:
+      type: string
+      title: Icon name (exclude prefix)
+      description: Set icon name (exclude prefix).
+      default: "rocket"
+      examples:
+        - "rocket"
+    icon_size:
+      type: string
+      title: Icon size
+      description: Set icon size.
+      enum:
+        - small
+        - regular
+        - large
+      meta:enum:
+        small: Small
+        regular: Regular
+        large: Large
+      default: regular
+      examples:
+        - regular
+    icon_align:
+      type: string
+      title: Icon alignment
+      description: Set icon alignment.
+      enum:
+        - left
+        - right
+        - center
+      meta:enum:
+        left: Left
+        center: Center
+        right: Right
+      default: center
+      examples:
+        - center

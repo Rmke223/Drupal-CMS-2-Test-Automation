@@ -1,0 +1,7 @@
+{# Apple promo grid #}
+{% set grid_cols = columns|default(2) %}
+{% set grid_gap = gap|default('normal') %}
+
+<div class="apple-promo-grid apple-promo-grid--cols-{{ grid_cols }} apple-promo-grid--gap-{{ grid_gap }}">
+  {{ items }}
+</div>

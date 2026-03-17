@@ -1,0 +1,83 @@
+name: Playwright Visual Snapshot Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "Site id from Playwright site registry"
+        required: true
+        default: "default"
+
+jobs:
+  update-visual-snapshots:
+    runs-on: ubuntu-latest
+
+    env:
+      PW_SITE: ${{ github.event.inputs.site }}
+      PW_RUN_SEED: "1"
+      PW_SKIP_WEB_SERVER: "1"
+      PW_SKIP_READY_CHECK: "1"
+      PW_ADMIN_USER: ${{ secrets.PW_ADMIN_USER }}
+      PW_ADMIN_PASS: ${{ secrets.PW_ADMIN_PASS }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Install DDEV
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl gnupg2 ca-certificates
+          sudo install -m 0755 -d /etc/apt/keyrings
+          curl -fsSL https://pkg.ddev.com/apt/ddev.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ddev.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *" | sudo tee /etc/apt/sources.list.d/ddev.list
+          sudo apt-get update
+          sudo apt-get install -y ddev
+
+      - name: Start Drupal services
+        run: ddev start -y
+
+      - name: Install PHP dependencies
+        run: ddev composer install --no-interaction --prefer-dist
+
+      - name: Ensure Drupal is installed
+        run: |
+          set -euo pipefail
+          if ddev drush status --field=bootstrap | grep -qi successful; then
+            echo "Drupal is already installed."
+          else
+            echo "Drupal not installed. Running site install."
+            ddev drush site:install standard -y \
+              --account-name="${PW_ADMIN_USER:-admin}" \
+              --account-pass="${PW_ADMIN_PASS:-admin}" \
+              --site-name="CI Drupal"
+          fi
+
+      - name: Resolve base URL from DDEV
+        run: |
+          ddev describe -j > /tmp/ddev-describe.json
+          node -e "const fs=require('node:fs');const d=JSON.parse(fs.readFileSync('/tmp/ddev-describe.json','utf8'));const u=d.raw?.httpurl||d.raw?.primary_url||d.raw?.urls?.[0];if(!u){process.exit(1)};console.log('PW_BASE_URL='+u);" >> $GITHUB_ENV
+
+      - name: Update visual snapshots
+        run: npm run test:pw:visual:update
+
+      - name: Upload updated snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-visual-snapshots-${{ env.PW_SITE }}-${{ github.run_id }}
+          path: testing/playwright/sites/${{ env.PW_SITE }}/tests/**/__snapshots__
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,0 +1,14 @@
+uuid: 7d71f94d-182c-4a08-a4c0-f78b9c835985
+langcode: en
+status: true
+dependencies: {  }
+name: Components/Cards
+configEntityTypeId: component
+weight: 0
+items:
+  - sdc.mercury.card
+  - sdc.mercury.card-events
+  - sdc.mercury.card-pricing
+  - sdc.mercury.card-profile
+  - sdc.mercury.card-project
+  - sdc.mercury.card-testimonial
