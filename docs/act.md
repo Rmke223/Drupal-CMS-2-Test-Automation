@@ -17,6 +17,8 @@ cp .secrets.act.example .secrets.act
 ```
 
 Set real values in `.secrets.act` if you want authenticated admin tests.
+For this workflow, set `PW_BASE_URL` to a host-running Drupal URL reachable from `act` container.
+With DDEV on macOS/OrbStack, `http://host.docker.internal:<ddev-http-port>` is the reliable option.
 
 ## Commands
 
@@ -54,6 +56,21 @@ This improves compatibility with GitHub-hosted runner behavior.
 ### Docker not ready
 
 If `act` fails before steps run, ensure Docker daemon is active.
+
+### DDEV root-privilege error inside act
+
+`act` jobs run as root in the runner container, and DDEV rejects root usage.
+This workflow now skips DDEV bootstrap when `ACT=true`, expects `PW_BASE_URL` in `.secrets.act`,
+and disables seed + artifact upload actions that depend on GitHub runtime services.
+
+Typical local flow:
+
+```bash
+ddev start
+ddev describe
+# copy the HTTP host URL/port and set PW_BASE_URL in .secrets.act
+npm run ci:act:playwright
+```
 
 ### Secrets file missing
 

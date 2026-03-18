@@ -25,6 +25,21 @@ Minimum sizing:
    - AnsiColor
    - Timestamper
 
+### One-shot VM bootstrap (cloud-init)
+
+Use `jenkins/controller-cloud-init.yaml` when creating the VM.
+
+What it does:
+- installs Java 21 + Jenkins
+- enables and starts Jenkins service
+- opens firewall ports `22` and `8080`
+- prints initial admin password to `/var/log/install-jenkins.log`
+
+After provisioning:
+1. Open `http://<vm-ip>:8080`
+2. Get password from `/var/lib/jenkins/secrets/initialAdminPassword`
+3. Complete Jenkins first-run setup wizard
+
 ## 3. Agent Setup (Ubuntu 24.04)
 
 Run bootstrap on the agent VM:

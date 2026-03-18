@@ -33,5 +33,10 @@ export async function loginAsAdmin(page: Page, runtime: RuntimeContext): Promise
   await page.getByLabel(/password/i).fill(password);
   await page.getByRole('button', { name: /log in/i }).click();
 
-  await expect(page).toHaveURL(/\/user\/\d+|\/admin|\/user/i);
+  // Successful login may land on '/', '/user', '/user/<id>', or '/admin'.
+  await expect(page).toHaveURL(/\/user\/\d+|\/admin|\/user|\/$/i);
+
+  // Verify authenticated state, not just redirect behavior.
+  await page.goto('/user');
+  await expect(page).not.toHaveURL(/\/user\/login/i);
 }

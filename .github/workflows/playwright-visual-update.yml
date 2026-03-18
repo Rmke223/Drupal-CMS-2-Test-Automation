@@ -41,14 +41,31 @@ jobs:
 
       - name: Install DDEV
         run: |
-          sudo apt-get update
-          sudo apt-get install -y curl gnupg2 ca-certificates
+          retry_apt() {
+            local attempts=5
+            local delay=8
+            for i in $(seq 1 "$attempts"); do
+              if "$@"; then
+                return 0
+              fi
+              echo "Attempt $i failed: $*"
+              if [ "$i" -lt "$attempts" ]; then
+                sleep "$delay"
+              fi
+            done
+            return 1
+          }
+
+          retry_apt sudo apt-get clean
+          retry_apt sudo rm -rf /var/lib/apt/lists/*
+          retry_apt sudo apt-get update -o Acquire::Retries=5
+          retry_apt sudo apt-get install -y curl gnupg2 ca-certificates
           sudo install -m 0755 -d /etc/apt/keyrings
           curl -fsSL https://pkg.ddev.com/apt/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/ddev.gpg > /dev/null
           sudo chmod a+r /etc/apt/keyrings/ddev.gpg
           echo "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *" | sudo tee /etc/apt/sources.list.d/ddev.list
-          sudo apt-get update
-          sudo apt-get install -y ddev
+          retry_apt sudo apt-get update -o Acquire::Retries=5
+          retry_apt sudo apt-get install -y ddev
 
       - name: Start Drupal services
         run: ddev start -y

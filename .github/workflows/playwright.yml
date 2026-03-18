@@ -27,6 +27,7 @@ jobs:
       PW_RUN_SEED: "1"
       PW_SKIP_WEB_SERVER: "1"
       PW_SKIP_READY_CHECK: "1"
+      PW_BASE_URL: ${{ secrets.PW_BASE_URL }}
       PW_ADMIN_USER: ${{ secrets.PW_ADMIN_USER }}
       PW_ADMIN_PASS: ${{ secrets.PW_ADMIN_PASS }}
 
@@ -47,24 +48,45 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Install DDEV
+        if: ${{ env.ACT != 'true' }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y curl gnupg2 ca-certificates
+          retry_apt() {
+            local attempts=5
+            local delay=8
+            for i in $(seq 1 "$attempts"); do
+              if "$@"; then
+                return 0
+              fi
+              echo "Attempt $i failed: $*"
+              if [ "$i" -lt "$attempts" ]; then
+                sleep "$delay"
+              fi
+            done
+            return 1
+          }
+
+          retry_apt sudo apt-get clean
+          retry_apt sudo rm -rf /var/lib/apt/lists/*
+          retry_apt sudo apt-get update -o Acquire::Retries=5
+          retry_apt sudo apt-get install -y curl gnupg2 ca-certificates
           sudo install -m 0755 -d /etc/apt/keyrings
           curl -fsSL https://pkg.ddev.com/apt/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/ddev.gpg > /dev/null
           sudo chmod a+r /etc/apt/keyrings/ddev.gpg
           echo "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *" | sudo tee /etc/apt/sources.list.d/ddev.list
-          sudo apt-get update
-          sudo apt-get install -y ddev
+          retry_apt sudo apt-get update -o Acquire::Retries=5
+          retry_apt sudo apt-get install -y ddev
 
       - name: Start Drupal services
+        if: ${{ env.ACT != 'true' }}
         run: |
           ddev start -y
 
       - name: Install PHP dependencies
+        if: ${{ env.ACT != 'true' }}
         run: ddev composer install --no-interaction --prefer-dist
 
       - name: Ensure Drupal is installed
+        if: ${{ env.ACT != 'true' }}
         run: |
           set -euo pipefail
           if ddev drush status --field=bootstrap | grep -qi successful; then
@@ -79,10 +101,27 @@ jobs:
           ddev drush status
 
       - name: Resolve base URL from DDEV
+        if: ${{ env.ACT != 'true' }}
         run: |
           ddev describe -j > /tmp/ddev-describe.json
           node -e "const fs=require('node:fs');const d=JSON.parse(fs.readFileSync('/tmp/ddev-describe.json','utf8'));const u=d.raw?.httpurl||d.raw?.primary_url||d.raw?.urls?.[0];if(!u){process.exit(1)};console.log('PW_BASE_URL='+u);" >> $GITHUB_ENV
           echo "Using $PW_BASE_URL"
+
+      - name: Resolve base URL for act
+        if: ${{ env.ACT == 'true' }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PW_BASE_URL:-}" ]; then
+            echo "PW_BASE_URL must be provided for act runs (set it in .secrets.act)."
+            exit 1
+          fi
+          echo "Using PW_BASE_URL=${PW_BASE_URL}"
+
+      - name: Disable seed for act
+        if: ${{ env.ACT == 'true' }}
+        run: |
+          echo "PW_RUN_SEED=0" >> "$GITHUB_ENV"
+          echo "Disabled seed step for act run."
 
       - name: Preflight test discovery
         run: npm run test:pw:list
@@ -94,14 +133,22 @@ jobs:
         if: failure()
         run: |
           echo "===== DDEV STATUS ====="
-          ddev status || true
+          if [ "${ACT:-}" = "true" ]; then
+            echo "Skipping ddev diagnostics in act (ddev not available in runner)."
+          else
+            ddev status || true
+          fi
           echo "===== DRUSH STATUS ====="
-          ddev drush status || true
+          if [ "${ACT:-}" = "true" ]; then
+            echo "Skipping drush diagnostics in act (ddev not available in runner)."
+          else
+            ddev drush status || true
+          fi
           echo "===== TEST ARTIFACT TREE ====="
           find testing/playwright -maxdepth 4 -type d | sort || true
 
       - name: Upload Playwright artifacts
-        if: always()
+        if: ${{ always() && env.ACT != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-${{ env.PW_SITE }}-${{ github.run_id }}

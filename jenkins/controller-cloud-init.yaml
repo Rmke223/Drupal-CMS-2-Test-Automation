@@ -1,0 +1,56 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+hostname: jenkins-controller
+
+packages:
+  - ca-certificates
+  - curl
+  - gnupg
+  - openjdk-21-jre
+  - ufw
+
+write_files:
+  - path: /usr/local/bin/install-jenkins.sh
+    owner: root:root
+    permissions: '0755'
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      if ! command -v java >/dev/null 2>&1; then
+        apt-get update
+        apt-get install -y openjdk-21-jre
+      fi
+
+      curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+      echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" > /etc/apt/sources.list.d/jenkins.list
+
+      apt-get update
+      apt-get install -y jenkins
+
+      systemctl enable jenkins
+      systemctl restart jenkins
+
+      # Basic host firewall. Open SSH + Jenkins web.
+      ufw allow 22/tcp
+      ufw allow 8080/tcp
+      ufw --force enable
+
+      # Print initial admin password for first login.
+      if [ -f /var/lib/jenkins/secrets/initialAdminPassword ]; then
+        echo "========================================"
+        echo "Jenkins initial admin password:"
+        cat /var/lib/jenkins/secrets/initialAdminPassword
+        echo "========================================"
+      fi
+
+runcmd:
+  - [ bash, -lc, '/usr/local/bin/install-jenkins.sh | tee /var/log/install-jenkins.log' ]
+
+final_message: |
+  Jenkins bootstrap complete.
+  Service: systemctl status jenkins
+  UI: http://<vm-ip>:8080
+  Initial password: /var/lib/jenkins/secrets/initialAdminPassword
