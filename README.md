@@ -37,6 +37,7 @@ Playwright-based automated testing architecture lives under `testing/playwright`
 
 - Architecture and usage docs: `testing/playwright/README.md`
 - Environment variables example: `.env.playwright.example`
+- Jenkins VM setup guide: `docs/jenkins.md`
 
 ## Contributing
 
