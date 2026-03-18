@@ -1,5 +1,7 @@
 node_modules/
 .npm-cache/
+.cache/
 playwright/.cache/
 testing/playwright/artifacts/
 .env.playwright
+.secrets.act

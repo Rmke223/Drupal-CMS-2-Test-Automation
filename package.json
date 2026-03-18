@@ -21,7 +21,10 @@
     "test:pw:headed": "playwright test -c testing/playwright/playwright.config.ts --headed",
     "test:pw:debug": "cross-env PWDEBUG=1 playwright test -c testing/playwright/playwright.config.ts --project=e2e-chromium",
     "test:pw:seed": "node testing/playwright/scripts/seed-site.mjs",
-    "test:pw:ready": "node testing/playwright/scripts/ensure-site-ready.mjs"
+    "test:pw:ready": "node testing/playwright/scripts/ensure-site-ready.mjs",
+    "ci:act:list": "cross-env XDG_CACHE_HOME=.cache act -W .github/workflows/playwright.yml -l",
+    "ci:act:dry": "cross-env XDG_CACHE_HOME=.cache act pull_request -W .github/workflows/playwright.yml -j test -n",
+    "ci:act:playwright": "cross-env XDG_CACHE_HOME=.cache act pull_request -W .github/workflows/playwright.yml -j test --secret-file .secrets.act"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
