@@ -13,6 +13,7 @@ pipeline {
     string(name: 'PW_SITE', defaultValue: 'default', description: 'Site id from testing/playwright/core/config/site-registry.ts')
     booleanParam(name: 'RUN_VISUAL', defaultValue: false, description: 'Run visual snapshots (requires committed baselines).')
     booleanParam(name: 'RUN_SEED', defaultValue: true, description: 'Run deterministic seed step before tests.')
+    string(name: 'PW_WORKERS', defaultValue: '1', description: 'Playwright worker count (lower = less host impact).')
   }
 
   environment {
@@ -21,6 +22,7 @@ pipeline {
     PW_SKIP_READY_CHECK = '1'
     PW_SITE = "${params.PW_SITE}"
     PW_RUN_SEED = "${params.RUN_SEED}"
+    PW_WORKERS = "${params.PW_WORKERS}"
   }
 
   stages {
@@ -54,7 +56,7 @@ pipeline {
 
     stage('Install Playwright Browser') {
       steps {
-        sh 'npx playwright install --with-deps chromium'
+        sh 'npx playwright install chromium'
       }
     }
 
